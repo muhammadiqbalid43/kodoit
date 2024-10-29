@@ -1,10 +1,9 @@
-import { Button } from "@/components/ui/button";
+import Auth from "./auth/page";
 
 export default function Home() {
   return (
     <>
-      <h1>Project Setup</h1>
-      <Button>Test</Button>
+      <Auth />
     </>
   );
 }
