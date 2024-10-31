@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuthActions } from "@convex-dev/auth/react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,7 +13,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { FaGithub } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
 import { SignInFlow } from "@/types/types";
 
 interface SignInProps {
@@ -20,8 +20,13 @@ interface SignInProps {
 }
 
 export default function SignIn({ setState }: SignInProps) {
+  const { signIn } = useAuthActions();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleProviderSignIn = (value: "github") => {
+    signIn(value);
+  };
 
   return (
     <Card className="w-[350px] mx-auto">
@@ -70,12 +75,11 @@ export default function SignIn({ setState }: SignInProps) {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <Button variant="outline">
-            <FcGoogle />
-            Google
-          </Button>
-          <Button variant="outline">
+        <div className="grid grid-cols-1 gap-4">
+          <Button
+            variant="outline"
+            onClick={() => handleProviderSignIn("github")}
+          >
             <FaGithub />
             GitHub
           </Button>
